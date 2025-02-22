@@ -1,7 +1,10 @@
+
+
 function deleteCard(cardElement) {
     cardElement.remove();
 }
-
+// Добавляем изображение в header
+header.appendChild(img);
 function createCard(cardData, onDelete) {
     const cardTemplate = document.querySelector('#card-template');
     const cardElement = cardTemplate.content.cloneNode(true).firstElementChild;
@@ -27,4 +30,3 @@ for (let i = 0; i < initialCards.length; i++) {
     const cardElement = createCard(initialCards[i], deleteCard);
     placesList.appendChild(cardElement);
 }
-import './styles/index.css';

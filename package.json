@@ -4,9 +4,8 @@
   "description": "https://github.com/LikaF1/mesto-project-ff.git",
   "main": "index.js",
   "scripts": {
-     
-            "build": "webpack --mode production",
-  "dev": "webpack serve"
+    "build": "webpack --mode production",
+    "dev": "webpack serve"
   },
   "author": "Furiak Anjelika",
   "license": "ISC",
@@ -18,14 +17,17 @@
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^7.1.2",
     "cssnano": "^7.0.6",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.6.3",
     "mini-css-extract-plugin": "^2.9.2",
     "postcss-loader": "^8.1.1",
+    "style-loader": "^4.0.0",
+    "url-loader": "^4.1.1",
     "webpack": "^5.97.1",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.0"
   },
-    "dependencies": {
-      "core-js": "^3.40.0"
-    }
+  "dependencies": {
+    "core-js": "^3.40.0"
   }
+}

@@ -42,7 +42,16 @@ module.exports = {
       {
         // регулярное выражение, которое ищет все файлы с такими расширениями
         test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/,
-        type: 'asset/resource'
+        type: 'asset/resource',
+      //   use: [
+      //     {
+      //         loader: 'file-loader',
+      //         options: {
+      //             name: '[path][name].[ext]',
+      //         },
+      //     },
+      // ],
+        
       },
       ]
   },
