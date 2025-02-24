@@ -30,3 +30,6 @@ for (let i = 0; i < initialCards.length; i++) {
     const cardElement = createCard(initialCards[i], deleteCard);
     placesList.appendChild(cardElement);
 }
+
+
+
