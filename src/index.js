@@ -2,16 +2,18 @@ import { initialCards } from './scripts/cards';
 import './pages/index.css';
 import logo from './images/logo.svg';
 import avatar from './images/avatar.jpg'; 
-import { openModal, closeModal, ImageClickOpen } from "./component/openImg";
+import { openModal, closeModal} from "./scripts/open";
+import { createCard, handleLikeButtonClick, deleteCard } from "./scripts/CardFunction";
+
 const profileImage = document.querySelector('.profile__image');
 profileImage.style.backgroundImage = `url(${avatar})`;
 
 const header = document.querySelector('.header');
-const img = document.createElement('img');
-img.src = logo; 
-img.alt = 'Логотип проекта масто';
-img.classList.add('logo', 'header__logo');
-header.appendChild(img);
+const imgHeader= document.createElement('img');
+imgHeader.src = logo; 
+imgHeader.alt = 'Логотип проекта масто';
+imgHeader.classList.add('logo', 'header__logo');
+header.appendChild(imgHeader);
 const popups = document.querySelectorAll(".popup");
 
 // Находим элементы для редактирования профиля
@@ -33,38 +35,6 @@ const placesList = document.querySelector('.places__list');
 const addButton = document.querySelector('.profile__add-button'); 
 
 // Функция для удаления карточки
-function deleteCard(cardElement) {
-    cardElement.remove();
-}
-// ..........
-function handleLikeButtonClick(event) {
-    const likeButton = event.target;
-    likeButton.classList.toggle('card__like-button_is-active');
-}
-
-// Функция для создания карточки
-function createCard(cardData, handleLike, ImageClickOpen ) {
-    const cardTemplate = document.querySelector('#card-template');
-    const cardElement = cardTemplate.content.cloneNode(true).firstElementChild;
-    const cardImage = cardElement.querySelector('.card__image');
-    const cardTitle = cardElement.querySelector('.card__title');
-    const deleteButton = cardElement.querySelector('.card__delete-button');
-    const likeButton = cardElement.querySelector('.card__like-button');
-
-
-    cardImage.src = cardData.link;
-    cardImage.alt = cardData.name;  
-    cardTitle.textContent = cardData.name;
-
-    deleteButton.addEventListener('click', () => {
-        console.log('Удаление карточки:', cardElement);
-        deleteCard(cardElement);
-    });
-    //zdes
-    likeButton.addEventListener('click', handleLike);
-    cardImage.addEventListener('click',() => ImageClickOpen(cardData));
-    return cardElement; 
-}
 //open img
 // ,,,,,,,,,,,,,,,,,,
 
@@ -76,12 +46,12 @@ popups.forEach((popup) => {
   });
 });
 
-// closeButtons.forEach((item) => {
-//   const modal = item.closest(".popup");
-//   item.addEventListener("click", () => {
-//     closeModal(modal);
-//   });
-// });
+closeButtons.forEach((item) => {
+  const modal = item.closest(".popup");
+  item.addEventListener("click", () => {
+    closeModal(modal);
+  });
+});
 
 // ..................
 document.addEventListener('click',ImageClickOpen)
@@ -94,6 +64,17 @@ initialCards.forEach(cardData => {
 
 
 
+const image = document.querySelector(".popup_type_image");
+const imagePopup = document.querySelector(".popup__image");
+const captionPopup = document.querySelector(".popup__caption");
+
+function openImage(cardData) {
+  imagePopup.src = cardData.link;
+  imagePopup.alt = cardData.name;
+  captionPopup.textContent = cardData.name;
+
+  openModal(image);
+}
 // Функция для открытия/закрытия модального окна
 function togglePopup(popup, isOpen) {
     popup.style.display = isOpen ? 'block' : 'none'; 
@@ -123,10 +104,13 @@ function handleOverlayClose(event) {
 }
 
 // Обработчик клика по кнопке «Редактировать»
-editButton.addEventListener('click', () => {
+editButton.addEventListener('click', (evt) => {
+    evt.preventDefault();
     nameInput.value = document.querySelector('.profile__title').textContent;
     jobInput.value = document.querySelector('.profile__description').textContent;
-    togglePopup(popupEdit, true);
+    // togglePopup(popupEdit, true);
+    openModal(popupEdit);
+
 });
 
 // Обработчик клика по кнопке закрытия
