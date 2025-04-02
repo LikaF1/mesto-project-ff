@@ -1,4 +1,4 @@
-export { openModal, closeModal, ImageClickOpen}
+export { openModal, closeModal}
 
 // const image = document.querySelector('.popup_type_image');
 // const imgPopup = document.querySelector('.popup__image');
