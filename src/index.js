@@ -16,8 +16,7 @@ header.appendChild(imgHeader);
 const popups = document.querySelectorAll(".popup");
 const editButton = document.querySelector(".profile__edit-button");
 const popupEdit = document.querySelector(".popup_type_edit");
-const closeButton = popupEdit.querySelector(".popup__close");
-const formElement = popupEdit.querySelector(".popup__form");
+const formProfile = popupEdit.querySelector(".popup__form");
 const nameInput = popupEdit.querySelector(".popup__input_type_name");
 const jobInput = popupEdit.querySelector(".popup__input_type_description");
 const closeButtons = document.querySelectorAll(".popup__close");
@@ -29,10 +28,11 @@ const cardNameInput = popupNewCard.querySelector(
 const cardLinkInput = popupNewCard.querySelector(".popup__input_type_url");
 const placesList = document.querySelector(".places__list");
 const addButton = document.querySelector(".profile__add-button");
-const image = document.querySelector(".popup_type_image");
+const imageCard = document.querySelector(".popup_type_image");
 const imagePopup = document.querySelector(".popup__image");
 const captionPopup = document.querySelector(".popup__caption");
-
+let profileTitle = document.querySelector(".profile__title");
+let profileDescription = document.querySelector(".profile__description");
 popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup")) {
@@ -52,35 +52,32 @@ initialCards.forEach((element) => {
   const newCard = createCard(
     element,
     handleLikeButtonClick,
-    ImageClickOpen,
+    imageClickOpen,
     deleteCard
   );
   placesList.appendChild(newCard);
 });
 
-function ImageClickOpen(cardData) {
+function imageClickOpen(cardData) {
   imagePopup.src = cardData.link;
   imagePopup.alt = cardData.name;
   captionPopup.textContent = cardData.name;
-  openModal(image);
+  openModal(imageCard);
 }
 
 editButton.addEventListener("click", (evt) => {
   evt.preventDefault();
-  nameInput.value = document.querySelector(".profile__title").textContent;
-  jobInput.value = document.querySelector(".profile__description").textContent;
   openModal(popupEdit);
+  nameInput.value = profileTitle.textContent;
+  jobInput.value = profileDescription.textContent;
 });
 
-closeButton.addEventListener("click", () => {
-  closeModal(popupEdit);
-});
-
-formElement.addEventListener("submit", (evt) => {
+formProfile.addEventListener("submit", (evt) => {
   evt.preventDefault();
-  document.querySelector(".profile__title").textContent = nameInput.value;
-  document.querySelector(".profile__description").textContent = jobInput.value;
   openModal(popupEdit);
+  profileTitle.textContent = nameInput.value;
+  profileDescription.textContent = jobInput.value;
+  closeModal(popupEdit);
 });
 
 addButton.addEventListener("click", (evt) => {
@@ -97,29 +94,14 @@ formNewCard.addEventListener("submit", function (evt) {
     link: cardLink,
   };
 
-  initialCards.unshift(newCardData);
   const newCardElement = createCard(
     newCardData,
     handleLikeButtonClick,
-    ImageClickOpen,
+    imageClickOpen,
     deleteCard
   );
   placesList.prepend(newCardElement);
-  openModal(popupNewCard);
+  closeModal(popupNewCard);
   formNewCard.reset();
 });
 
-popups.forEach((popup) => {
-  popup.addEventListener("mousedown", (evt) => {
-    if (evt.target.classList.contains("popup")) {
-      closeModal(popup);
-    }
-  });
-});
-
-closeButtons.forEach((item) => {
-  const modal = item.closest(".popup");
-  item.addEventListener("click", () => {
-    closeModal(modal);
-  });
-});

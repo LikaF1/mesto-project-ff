@@ -9,7 +9,7 @@ const cardTemplate = document.querySelector("#card-template").content;
 function createCard(
   element,
   handleLikeButtonClick,
-  ImageClickOpen,
+  imageClickOpen,
   deleteCard
 ) {
   const cardElement = cardTemplate
@@ -32,7 +32,7 @@ function createCard(
     handleLikeButtonClick(evt);
   });
 
-  cardImage.addEventListener("click", () => ImageClickOpen(element));
+  cardImage.addEventListener("click", () => imageClickOpen(element));
   return cardElement;
 }
 
