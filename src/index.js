@@ -31,8 +31,9 @@ const addButton = document.querySelector(".profile__add-button");
 const imageCard = document.querySelector(".popup_type_image");
 const imagePopup = document.querySelector(".popup__image");
 const captionPopup = document.querySelector(".popup__caption");
-let profileTitle = document.querySelector(".profile__title");
-let profileDescription = document.querySelector(".profile__description");
+const profileTitle = document.querySelector(".profile__title");
+const profileDescription = document.querySelector(".profile__description");
+
 popups.forEach((popup) => {
   popup.addEventListener("mousedown", (evt) => {
     if (evt.target.classList.contains("popup")) {
